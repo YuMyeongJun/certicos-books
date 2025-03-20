@@ -28,7 +28,7 @@ export const CerticosLayout = () => {
           onChange={setTab}
         />
       </div>
-      <div className="px-10 w-[568px]">
+      <div className="px-10">
         <Outlet />
       </div>
     </div>

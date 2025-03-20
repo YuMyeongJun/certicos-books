@@ -15,12 +15,20 @@ export const CerticosLayout = () => {
     },
   ];
   return (
-    <div>
-      <div className="grid grid-cols-[40%_auto] py-6 px-40 mb-[188px]">
-        <div className="text-2xl font-bold">CERTICOS BOOKS</div>
-        <Tab items={tabItem} defaultTab={tab} gap={10} onChange={setTab} />
+    <div className="flex w-full flex-col items-center justify-center">
+      <div className="flex py-6 px-10 mb-5 w-full">
+        <div className="justify-self-start text-2xl font-bold">
+          CERTICOS BOOKS
+        </div>
+        <Tab
+          className="justify-self-center"
+          items={tabItem}
+          defaultTab={tab}
+          gap={10}
+          onChange={setTab}
+        />
       </div>
-      <div className="px-40">
+      <div className="px-10 w-[568px]">
         <Outlet />
       </div>
     </div>

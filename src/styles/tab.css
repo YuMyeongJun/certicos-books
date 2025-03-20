@@ -1,0 +1,16 @@
+.cb-tab,
+.cb-tab-container {
+  @apply flex;
+}
+
+.cb-tab-left {
+  @apply justify-start;
+}
+
+.cb-tab-right {
+  @apply justify-end;
+}
+
+.cb-tab-center {
+  @apply justify-center;
+}

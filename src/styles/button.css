@@ -1,0 +1,15 @@
+.cb-button {
+  @apply text-[16px] rounded-[8px] px-2.5 py-1.25;
+}
+
+.cb-button-detail-search {
+  @apply border border-solid border-[var(--search-gray)] text-[var(--search-gray)];
+}
+
+.cb-button-blue {
+  @apply bg-[var(--blue-DEFAULT)] text-white;
+}
+
+.cb-button-gray {
+  @apply bg-[var(--search-background)] text-[var(--search-gray)];
+}

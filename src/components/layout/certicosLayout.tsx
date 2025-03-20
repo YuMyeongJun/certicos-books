@@ -1,8 +1,9 @@
-import { Outlet } from "react-router";
+import { Outlet, useNavigate } from "react-router";
 import { Tab } from "../common";
 import { useState } from "react";
 
 export const CerticosLayout = () => {
+  const navigate = useNavigate();
   const [tab, setTab] = useState(1);
   const tabItem = [
     {
@@ -14,6 +15,11 @@ export const CerticosLayout = () => {
       label: "내가 찜한 책",
     },
   ];
+
+  const handleOnChangeTab = (key: number) => {
+    setTab(key);
+    navigate(`/${key === 1 ? "" : "favorite"}`);
+  };
   return (
     <div className="flex w-full flex-col items-center justify-center">
       <div className="flex py-6 px-10 mb-5 w-full">
@@ -25,7 +31,7 @@ export const CerticosLayout = () => {
           items={tabItem}
           defaultTab={tab}
           gap={10}
-          onChange={setTab}
+          onChange={handleOnChangeTab}
         />
       </div>
       <div className="px-10">

@@ -1,7 +1,4 @@
-import {
-  BookSearchComponent,
-  BookSearchViewModelProvider,
-} from "../components";
+import { BookSearchComponent, BookSearchViewModelProvider } from "@/components";
 
 export const BookSearchPage = () => {
   return (

@@ -1,6 +1,9 @@
 :root {
   --blue-DEFAULT: #4880ee;
   --primary-title: #353c49;
+  --primary-secondary: #6d7582;
+  --primary-divider: #e5e7eb;
   --search-title: #1a1e27;
   --search-background: #f2f4f6;
+  --search-gray: #8d94a0;
 }

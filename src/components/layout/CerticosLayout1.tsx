@@ -21,20 +21,19 @@ export const CerticosLayout = () => {
     navigate(`/${key === 1 ? "" : "favorite"}`);
   };
   return (
-    <div className="flex w-full flex-col items-center justify-center">
-      <div className="flex py-6 px-10 mb-5 w-full">
-        <div className="justify-self-start text-2xl font-bold">
+    <div className="flex flex-col items-center justify-center">
+      <div className="flex py-6 px-10 mb-5 w-full relative justify-center">
+        <div className="absolute left-10 text-2xl font-bold">
           CERTICOS BOOKS
         </div>
         <Tab
-          className="justify-self-center"
           items={tabItem}
           defaultTab={tab}
           gap={10}
           onChange={handleOnChangeTab}
         />
       </div>
-      <div className="px-10">
+      <div className="px-10 w-[960px]">
         <Outlet />
       </div>
     </div>

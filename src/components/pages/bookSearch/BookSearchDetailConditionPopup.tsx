@@ -1,11 +1,29 @@
 import { IcDelete } from "@/assets/icons";
 import { Select } from "@/components/common";
+import classNames from "classnames";
 
-export const BookSearchDetailConditionPopup = () => {
+interface IBookSearchDetailConditionPopupProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+export const BookSearchDetailConditionPopup = ({
+  isOpen,
+  onClose,
+}: IBookSearchDetailConditionPopupProps) => {
   return (
-    <div className="bg-white p-3 flex flex-col justify-between rounded-2xl border-none absolute w-[360px] h-[160px] shadow-xs shadow-[#979797] top-12 -translate-x-1/2 left-1/2">
+    <div
+      className={classNames(
+        "bg-white p-3 flex-col justify-between rounded-2xl border-none absolute w-[360px] h-[160px] shadow-xs shadow-[#979797] top-12 -translate-x-1/2 left-1/2",
+        isOpen ? "flex" : "hidden"
+      )}
+    >
       <div className="flex justify-end">
-        <IcDelete stroke="#B1B8C0" />
+        <IcDelete
+          stroke="#B1B8C0"
+          onClick={onClose}
+          className="cursor-pointer"
+        />
       </div>
       <div className="flex px-6 gap-2">
         <Select

@@ -19,7 +19,7 @@ export const HttpProvider = ({ children }: { children: React.ReactNode }) => {
     });
 
     instance.interceptors.request.use((config) => {
-      config.headers.Authorization = REST_API_KEY;
+      config.headers.Authorization = `KakaoAK ${REST_API_KEY}`;
       return config;
     });
 

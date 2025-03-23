@@ -16,7 +16,6 @@ export const FavoriteBookComponent = () => {
       </div>
       <Empty text="찜한 책이 없습니다." />
       <BookCard />
-      <BookCard isDetail />
     </>
   );
 };

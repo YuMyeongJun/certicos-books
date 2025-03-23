@@ -1,7 +1,10 @@
 import { IcDelete, IcSearch } from "@/assets/icons";
 import { BookSearchDetailConditionPopup } from "./BookSearchDetailConditionPopup";
+import { useState } from "react";
 
 export const BookSearchCondition = () => {
+  const [isDetail, setIsDetail] = useState(false);
+
   return (
     <div className="w-[568px] mb-[25px]">
       <div className="text-[22px] leading-[24px] font-bold mb-[16px]">
@@ -31,10 +34,16 @@ export const BookSearchCondition = () => {
           </div>
         </div>
         <div className="relative flex items-center">
-          <button className="cb-button cb-button-detail-search">
+          <button
+            className="cb-button cb-button-detail-search"
+            onClick={() => setIsDetail(!isDetail)}
+          >
             상세검색
           </button>
-          <BookSearchDetailConditionPopup />
+          <BookSearchDetailConditionPopup
+            isOpen={isDetail}
+            onClose={() => setIsDetail(false)}
+          />
         </div>
       </div>
     </div>

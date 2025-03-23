@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import { usePopper } from "react-popper";
 import classNames from "classnames";
 
-import { ISelectProp } from "./Select.Types";
+import { ISelectProp } from "./Select.types";
 import { selectClasses } from "./SelectClasses";
 import { IcArrowDown } from "@/assets/icons";
 import { useOutsideClick } from "@/hooks/useOutsideClick";
@@ -308,7 +308,6 @@ export const Select = forwardRef<HTMLInputElement, ISelectProp>(
               disabled={disabled}
               readOnly
               className={classNames(
-                "outline-none",
                 { [selectClasses.disabled]: disabled },
                 showOptions ? "text-slate-400" : "text-black"
               )}

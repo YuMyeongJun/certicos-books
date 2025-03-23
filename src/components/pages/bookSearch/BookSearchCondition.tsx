@@ -1,4 +1,5 @@
 import { IcDelete, IcSearch } from "@/assets/icons";
+import { BookSearchDetailConditionPopup } from "./BookSearchDetailConditionPopup";
 
 export const BookSearchCondition = () => {
   return (
@@ -13,7 +14,7 @@ export const BookSearchCondition = () => {
             <input
               type="text"
               placeholder="검색어를 입력하세요"
-              className="w-full text-[16px] placeholder:text-[var(--search-gray)]"
+              className="w-full"
             />
           </div>
           <div className="flex justify-between pl-7 pr-2.5 text-[var(--search-gray)]">
@@ -29,10 +30,11 @@ export const BookSearchCondition = () => {
             <IcDelete />
           </div>
         </div>
-        <div className="flex items-center">
+        <div className="relative flex items-center">
           <button className="cb-button cb-button-detail-search">
             상세검색
           </button>
+          <BookSearchDetailConditionPopup />
         </div>
       </div>
     </div>

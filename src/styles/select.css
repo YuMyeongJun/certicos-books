@@ -7,7 +7,7 @@
 }
 
 .cb-select-focus {
-  @apply border-[var(--blue-DEFAULT)] ring-2 ring-[var(--blue-DEFAULT)] text-[#b3b1b1];
+  @apply border-[var(--cb-palette-primary)] ring-2 ring-[var(--cb-palette-primary)] text-[#b3b1b1];
 }
 
 .cb-select-focus-none {
@@ -43,7 +43,7 @@
 }
 
 .cb-select-disabled {
-  @apply cursor-not-allowed rounded-lg bg-[var(--primary-divider)] text-[var(--primary-secondary)];
+  @apply cursor-not-allowed rounded-lg bg-[var(--primary-divider)] text-[var(--cb-text-secondary)];
 }
 
 .cb-select-disabled input {

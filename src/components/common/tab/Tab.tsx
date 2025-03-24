@@ -32,7 +32,11 @@ export const Tab = forwardRef<HTMLDivElement, ITabProps>(
       [tabClasses.center]: placement === "center",
     });
 
-    const tabItemClassName = classNames(tabItemClasses.root, itemClassName);
+    const tabItemClassName = classNames(
+      tabItemClasses.root,
+      "cb-text-body-1",
+      itemClassName
+    );
 
     const tabClick = (idx: number) => {
       setIsSelected(idx + 1);
@@ -53,7 +57,7 @@ export const Tab = forwardRef<HTMLDivElement, ITabProps>(
                   >
                     {x.label}
                     {isSelected === x.key && (
-                      <div className="absolute left-1/2 top-[100%] h-[1px] w-9/12 translate-x-[-50%] bg-[var(--blue-DEFAULT)]"></div>
+                      <div className="absolute left-1/2 top-[120%] h-[2px] w-8/12 translate-x-[-50%] bg-[var(--cb-palette-primary)]"></div>
                     )}
                   </div>
                 </>

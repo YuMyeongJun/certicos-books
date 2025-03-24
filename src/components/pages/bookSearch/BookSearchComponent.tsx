@@ -13,8 +13,8 @@ export const BookSearchComponent = () => {
         <div>도서 검색 결과</div>
         <div>
           총{" "}
-          <span className="text-[var(--blue-DEFAULT)]">
-            {bookData?.meta.total_count.toLocaleString() ?? 0}
+          <span className="text-[var(--cb-palette-primary)]">
+            {bookData?.meta.total_count?.toLocaleString() ?? 0}
           </span>
           건
         </div>
@@ -22,7 +22,7 @@ export const BookSearchComponent = () => {
       {bookData?.documents.length === 0 ? (
         <Empty text="검색 결과가 없습니다." />
       ) : (
-        <div className={classNames("min-w-[960px] mt-9")}>
+        <div className={classNames("min-w-[var(--cb-layout-width)] mt-9")}>
           {bookData?.documents.map((x) => {
             return (
               <>

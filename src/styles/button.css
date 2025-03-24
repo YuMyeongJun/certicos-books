@@ -1,5 +1,5 @@
 .cb-button {
-  @apply cursor-pointer text-[16px] rounded-[8px] px-2.5 py-1.25;
+  @apply cursor-pointer text-[var(--cb-text-caption)] rounded-[8px] px-2.5 py-1.25;
 }
 
 .cb-button-detail-search {
@@ -7,7 +7,7 @@
 }
 
 .cb-button-blue {
-  @apply bg-[var(--blue-DEFAULT)] text-white;
+  @apply bg-[var(--cb-palette-primary)] text-white;
 }
 
 .cb-button-gray {

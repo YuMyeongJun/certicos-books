@@ -1,9 +1,10 @@
-import { Outlet, useNavigate } from "react-router";
+import { Outlet, useNavigate, useLocation } from "react-router";
 import { Tab } from "../common";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export const CerticosLayout = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [tab, setTab] = useState(1);
   const tabItem = [
     {
@@ -20,6 +21,12 @@ export const CerticosLayout = () => {
     setTab(key);
     navigate(`/${key === 1 ? "" : "favorite"}`);
   };
+
+  useEffect(() => {
+    const pathname = location.pathname;
+    const tab = pathname.split("/")[1];
+    setTab(tab === "" ? 1 : 2);
+  }, []);
   return (
     <div className="flex flex-col items-center justify-center">
       <div className="flex py-6 px-10 mb-5 w-full relative justify-center">
@@ -27,13 +34,14 @@ export const CerticosLayout = () => {
           CERTICOS BOOKS
         </div>
         <Tab
+          key={tab}
           items={tabItem}
           defaultTab={tab}
           gap={10}
           onChange={handleOnChangeTab}
         />
       </div>
-      <div className="px-10 w-[960px]">
+      <div className="px-10 w-[var(--cb-layout-width)]">
         <Outlet />
       </div>
     </div>

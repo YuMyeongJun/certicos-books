@@ -1,15 +1,87 @@
 :root {
-  --blue-DEFAULT: #4880ee;
-  --primary-title: #353c49;
-  --primary-secondary: #6d7582;
+  --cb-layout-width: 960px;
+  --cb-book-search-condition-width: 568px;
+  --cb-book-search-detail-condition-popup-width: 360px;
+  --cb-card-image-full-width: 200px;
+  --cb-card-detail-buy-butotn-width: 240px;
+
+  --cb-palette-primary: #4880ee;
+  --cb-text-primary: #353c49;
+  --cb-text-secondary: #6d7582;
   --primary-divider: #e5e7eb;
   --search-title: #1a1e27;
   --search-background: #f2f4f6;
   --search-gray: #8d94a0;
+
+  --cb-text-title-1: 24px;
+  --cb-text-title-1-line-height: 24px;
+  --cb-text-title-2: 22px;
+  --cb-text-title-2-line-height: 22px;
+  --cb-text-title-3: 18px;
+  --cb-text-title-3-line-height: 18px;
+
+  --cb-text-body-1: 20px;
+  --cb-text-body-1-line-height: 20px;
+  --cb-text-body-2: 14px;
+  --cb-text-body-2-line-height: 14px;
+
+  --cb-text-caption: 16px;
+  --cb-text-caption-line-height: 16px;
+
+  --cb-text-sm: 10px;
+  --cb-text-sm-line-height: 10px;
+}
+
+.cb-text-title-1 {
+  font-size: var(--cb-text-title-1);
+  line-height: var(--cb-text-title-1-line-height);
+  font-weight: 700;
+}
+
+.cb-text-title-2 {
+  font-size: var(--cb-text-title-2);
+  line-height: var(--cb-text-title-2-line-height);
+  font-weight: 700;
+}
+
+.cb-text-title-3 {
+  font-size: var(--cb-text-title-3);
+  line-height: var(--cb-text-title-3-line-height);
+  font-weight: 700;
+}
+
+.cb-text-body-1 {
+  font-size: var(--cb-text-body-1);
+  line-height: var(--cb-text-body-1-line-height);
+  font-weight: 500;
+}
+
+.cb-text-body-2 {
+  font-size: var(--cb-text-body-2);
+  line-height: var(--cb-text-body-2-line-height);
+  font-weight: 500;
+}
+
+.cb-text-body-2-bold {
+  font-size: var(--cb-text-body-2);
+  line-height: var(--cb-text-body-2-line-height);
+  font-weight: 700;
+}
+
+.cb-text-caption {
+  font-size: var(--cb-text-caption);
+  line-height: var(--cb-text-caption-line-height);
+  font-weight: 500;
+}
+
+.cb-text-sm {
+  font-size: var(--cb-text-sm);
+  line-height: var(--cb-text-sm-line-height);
+  font-weight: 500;
 }
 
 input {
-  font-size: 16px;
+  font-size: var(--cb-text-body-2);
   outline: none;
 }
 

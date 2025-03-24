@@ -29,11 +29,7 @@ export const BookSearchViewModelProvider = ({
     queryKey: ["bookList"],
   });
 
-  const query = useBookListQuery({
-    page: searchQueryViewModel.condition.page,
-    query: searchQueryViewModel.condition.query,
-    target: searchQueryViewModel.condition.target,
-  });
+  const query = useBookListQuery(searchQueryViewModel.condition);
   const bookData = useMemo(() => {
     return query.data?.data;
   }, [query.data]);

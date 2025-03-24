@@ -1,7 +1,7 @@
 import { IcDelete, IcSearch } from "@/assets/icons";
 import { useForm } from "react-hook-form";
 import { BookSearchDetailConditionPopup } from "./BookSearchDetailConditionPopup";
-import { useMemo, useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import useViewModel from "@/hooks/useViewModel";
 import { BookSearchViewModel } from "./BookSearchViewModel";
 import { useOutsideClick } from "@/hooks/useOutsideClick";
@@ -9,8 +9,9 @@ import { IBookListConditionVO } from "@/models";
 
 export const BookSearchCondition = () => {
   const { condition, updateSearchQuery } = useViewModel(BookSearchViewModel);
-  const { register, handleSubmit } =
+  const { register, handleSubmit, setValue } =
     useForm<Pick<IBookListConditionVO, "query">>();
+
   const selectRef = useRef<HTMLDivElement>(null);
   const [inputFocus, setInputFocus] = useState(false);
   const [isDetail, setIsDetail] = useState(false);
@@ -21,6 +22,7 @@ export const BookSearchCondition = () => {
     updateSearchQuery({
       ...condition,
       query: data.query,
+      modalQuery: "",
     });
     if (data.query !== "") {
       handleAddMemoryQuery(data.query);
@@ -53,6 +55,11 @@ export const BookSearchCondition = () => {
     const storedQuery = localStorage.getItem("bookSearchQuery");
     setMemoryQuery(storedQuery);
   }, []);
+
+  useEffect(() => {
+    setValue("query", condition.query);
+  }, [condition.query]);
+
   return (
     <div className="relative w-[var(--cb-book-search-condition-width)] mb-[80px]">
       <div className="cb-text-title-2 font-bold mb-[16px]">도서 검색</div>
@@ -71,9 +78,7 @@ export const BookSearchCondition = () => {
               placeholder="검색어를 입력하세요"
               className="w-full"
               autoComplete="off"
-              {...register("query", {
-                // onBlur: () => setInputFocus(false),
-              })}
+              {...register("query")}
               onClick={() => setInputFocus(true)}
             />
           </form>
@@ -101,7 +106,9 @@ export const BookSearchCondition = () => {
           </button>
           <BookSearchDetailConditionPopup
             isOpen={isDetail}
-            onClose={() => setIsDetail(false)}
+            onClose={() => {
+              setIsDetail(false);
+            }}
           />
         </div>
       </div>

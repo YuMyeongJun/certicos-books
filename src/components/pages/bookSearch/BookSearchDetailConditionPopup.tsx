@@ -36,6 +36,7 @@ export const BookSearchDetailConditionPopup = ({
   ) => {
     updateSearchQuery({
       ...condition,
+      query: "",
       target: data.target,
       modalQuery: data.modalQuery,
     });

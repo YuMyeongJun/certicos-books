@@ -1,1 +1,1 @@
-export * from "./CerticosLayout1";
+export * from "./CerticosLayout";

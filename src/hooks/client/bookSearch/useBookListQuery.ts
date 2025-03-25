@@ -1,6 +1,6 @@
 import useHttp from "@/hooks/useHttp";
 import { IBookListReq, IBookListRes, IBookListConditionVO } from "@/models";
-import { useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 
 export const useBookListQuery = (condition: IBookListConditionVO) => {
   const http = useHttp();
@@ -14,13 +14,23 @@ export const useBookListQuery = (condition: IBookListConditionVO) => {
     size: 10,
     target: condition.target,
   };
-  const query = useQuery({
+  const infiniteQuery = useInfiniteQuery({
     queryKey: ["bookList", req],
-    queryFn: () =>
+    queryFn: ({ pageParam = 1 }) =>
       http.kakaoBookSearch.get<IBookListRes>("/search/book", {
-        params: req,
+        params: { ...req, page: pageParam },
       }),
+    initialPageParam: 1,
+    getNextPageParam: (lastPage) => lastPage.data.meta.pageable_count + 1,
   });
 
-  return query;
+  // const query = useQuery({
+  //   queryKey: ["bookList", req],
+  //   queryFn: () =>
+  //     http.kakaoBookSearch.get<IBookListRes>("/search/book", {
+  //       params: req,
+  //     }),
+  // });
+
+  return infiniteQuery;
 };

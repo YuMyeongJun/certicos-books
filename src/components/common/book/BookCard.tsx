@@ -88,7 +88,12 @@ export const BookCard = ({ dataSource }: IBookCard) => {
           {dataSource?.price?.toLocaleString()}원
         </div>
         <div className="flex gap-2">
-          <button className="cb-button cb-button-blue !py-3.25 !px-5">
+          <button
+            className="cb-button cb-button-blue !py-3.25 !px-5"
+            onClick={() => {
+              window.open(dataSource?.url, "_blank");
+            }}
+          >
             구매하기
           </button>
           <button
@@ -144,7 +149,12 @@ export const BookCard = ({ dataSource }: IBookCard) => {
                 </span>
               </div>
             )}
-            <button className="cb-button cb-button-blue !py-3.25 !px-5 w-[var(--cb-card-detail-buy-butotn-width)]">
+            <button
+              className="cb-button cb-button-blue !py-3.25 !px-5 w-[var(--cb-card-detail-buy-butotn-width)]"
+              onClick={() => {
+                window.open(dataSource?.url, "_blank");
+              }}
+            >
               구매하기
             </button>
           </div>

@@ -1,15 +1,22 @@
 import { createContext, useMemo } from "react";
 import {
   IBookListConditionVO,
+  IBookListDocumentDto,
+  IBookListMetaDto,
   IBookListRes,
   ISearchQueryViewModel,
 } from "@/models";
 import { useSearchQueryViewModel } from "@/hooks/useSearchQueryViewModel";
 import { useBookListQuery } from "@/hooks";
+import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
+import { InfiniteQueryObserverResult } from "@tanstack/react-query";
 
 export interface IBookSearchViewModel
   extends ISearchQueryViewModel<IBookListConditionVO> {
-  bookData?: IBookListRes;
+  bookDataMeta?: IBookListMetaDto;
+  bookDataList?: IBookListDocumentDto[];
+  hasNextPage: boolean | undefined;
+  fetchNextPage: () => Promise<InfiniteQueryObserverResult>;
 }
 
 export const BookSearchViewModel = createContext<
@@ -29,16 +36,24 @@ export const BookSearchViewModelProvider = ({
     queryKey: ["bookList"],
   });
 
-  const query = useBookListQuery(searchQueryViewModel.condition);
-  const bookData = useMemo(() => {
-    return query.data?.data;
-  }, [query.data]);
+  const { data, fetchNextPage, hasNextPage } = useBookListQuery(
+    searchQueryViewModel.condition
+  );
 
+  const bookDataList = useMemo(() => {
+    return data?.pages.flatMap((page) => page.data.documents);
+  }, [data]);
+  const bookDataMeta = useMemo(() => {
+    return data?.pages[0].data.meta;
+  }, [data]);
   return (
     <BookSearchViewModel.Provider
       value={{
         ...searchQueryViewModel,
-        bookData,
+        bookDataList,
+        bookDataMeta,
+        hasNextPage,
+        fetchNextPage,
       }}
     >
       {children}

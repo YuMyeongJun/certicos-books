@@ -1,18 +1,52 @@
 import { BookCard, Empty } from "@/components/common";
 import { IBookListDocumentDto } from "@/models";
 import classNames from "classnames";
-import { Children, useEffect } from "react";
-import { useState } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
+
+const PAGE_SIZE = 10; // 한 페이지에 표시할 항목 수
 
 export const FavoriteBookComponent = () => {
   const [isHeartList, setIsHeartList] = useState<IBookListDocumentDto[]>([]);
+  const [displayedBooks, setDisplayedBooks] = useState<IBookListDocumentDto[]>(
+    []
+  );
+  const [page, setPage] = useState(1);
+  const observer = useRef<IntersectionObserver | null>(null);
 
   useEffect(() => {
     const bookList = localStorage.getItem("favoriteBookList");
     if (bookList) {
-      setIsHeartList(JSON.parse(bookList));
+      const parsedList = JSON.parse(bookList);
+      setIsHeartList(parsedList);
+      setDisplayedBooks(parsedList.slice(0, PAGE_SIZE));
     }
   }, []);
+
+  const lastBookElementRef = useCallback(
+    (node: HTMLDivElement | null) => {
+      if (observer.current) observer.current.disconnect();
+      observer.current = new IntersectionObserver((entries) => {
+        if (
+          entries[0].isIntersecting &&
+          displayedBooks.length < isHeartList.length
+        ) {
+          setPage((prevPage) => prevPage + 1);
+        }
+      });
+      if (node) observer.current.observe(node);
+    },
+    [displayedBooks, isHeartList]
+  );
+
+  useEffect(() => {
+    const start = (page - 1) * PAGE_SIZE;
+    const end = start + PAGE_SIZE;
+    setDisplayedBooks((prevBooks) => [
+      ...prevBooks,
+      ...isHeartList.slice(start, end),
+    ]);
+  }, [page]);
+
   return (
     <>
       <div className="w-[var(--cb-book-search-condition-width)] mb-[25px]">
@@ -32,16 +66,23 @@ export const FavoriteBookComponent = () => {
         <Empty text="찜한 책이 없습니다." />
       ) : (
         <div className={classNames("min-w-[var(--cb-layout-width)] mt-9")}>
-          {Children.toArray(
-            isHeartList.map((x) => {
+          {displayedBooks.map((x, index) => {
+            if (displayedBooks.length === index + 1) {
               return (
-                <>
+                <div ref={lastBookElementRef} key={x.isbn}>
                   <BookCard dataSource={x} />
                   <hr className="my-6.25 border-[var(--primary-divider)]" />
-                </>
+                </div>
               );
-            })
-          )}
+            } else {
+              return (
+                <div key={x.isbn}>
+                  <BookCard dataSource={x} />
+                  <hr className="my-6.25 border-[var(--primary-divider)]" />
+                </div>
+              );
+            }
+          })}
         </div>
       )}
     </>

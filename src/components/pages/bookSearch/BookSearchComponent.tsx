@@ -3,9 +3,16 @@ import { BookCard, Empty } from "@/components/common";
 import { BookSearchViewModel } from "./BookSearchViewModel";
 import useViewModel from "@/hooks/useViewModel";
 import classNames from "classnames";
+import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 
 export const BookSearchComponent = () => {
-  const { bookData } = useViewModel(BookSearchViewModel);
+  const { bookDataList, bookDataMeta, fetchNextPage, hasNextPage } =
+    useViewModel(BookSearchViewModel);
+
+  const { setTarget } = useIntersectionObserver({
+    fetchNextPage,
+    hasNextPage,
+  });
   return (
     <>
       <BookSearchCondition />
@@ -14,20 +21,23 @@ export const BookSearchComponent = () => {
         <div>
           총{" "}
           <span className="text-[var(--cb-palette-primary)]">
-            {bookData?.meta.total_count?.toLocaleString() ?? 0}
+            {bookDataMeta?.total_count?.toLocaleString() ?? 0}
           </span>
           건
         </div>
       </div>
-      {bookData?.documents.length === 0 ? (
+      {bookDataList?.length === 0 ? (
         <Empty text="검색 결과가 없습니다." />
       ) : (
         <div className={classNames("min-w-[var(--cb-layout-width)] mt-9")}>
-          {bookData?.documents.map((x) => {
+          {bookDataList?.map((x) => {
             return (
               <>
                 <BookCard dataSource={x} />
-                <hr className="my-6.25 border-[var(--primary-divider)]" />
+                <hr
+                  ref={setTarget}
+                  className="my-6.25 border-[var(--primary-divider)]"
+                />
               </>
             );
           })}

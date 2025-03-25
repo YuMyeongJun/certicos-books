@@ -9,8 +9,9 @@ import { IBookListConditionVO } from "@/models";
 
 export const BookSearchCondition = () => {
   const { condition, updateSearchQuery } = useViewModel(BookSearchViewModel);
-  const { register, handleSubmit, setValue } =
+  const { register, handleSubmit, setValue, watch } =
     useForm<Pick<IBookListConditionVO, "query">>();
+  const query = watch("query");
 
   const selectRef = useRef<HTMLDivElement>(null);
   const [inputFocus, setInputFocus] = useState(false);
@@ -80,22 +81,35 @@ export const BookSearchCondition = () => {
               autoComplete="off"
               {...register("query")}
               onClick={() => setInputFocus(true)}
+              onKeyDown={(e) => {
+                if (e.key === "Escape") {
+                  setInputFocus(false);
+                } else {
+                  setInputFocus(true);
+                }
+              }}
             />
           </form>
           {inputFocus &&
             memoryQueryList.length > 0 &&
-            [...memoryQueryList].reverse().map(
-              (x) =>
-                x !== "" && (
-                  <div className="flex justify-between pl-7 pr-2.5 text-[var(--search-gray)]">
-                    <span>{x}</span>
-                    <IcDelete
-                      className="cursor-pointer"
-                      onClick={() => handleRemoveMemoryQuery(x)}
-                    />
-                  </div>
-                )
-            )}
+            [
+              ...memoryQueryList.filter((x) =>
+                x.toUpperCase().includes(query.toUpperCase())
+              ),
+            ]
+              .reverse()
+              .map(
+                (x) =>
+                  x !== "" && (
+                    <div className="flex justify-between pl-7 pr-2.5 text-[var(--search-gray)]">
+                      <span>{x}</span>
+                      <IcDelete
+                        className="cursor-pointer"
+                        onClick={() => handleRemoveMemoryQuery(x)}
+                      />
+                    </div>
+                  )
+              )}
         </div>
         <div className="relative flex items-center">
           <button

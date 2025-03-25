@@ -30,7 +30,10 @@ export const CerticosLayout = () => {
   return (
     <div className="flex flex-col items-center justify-center">
       <div className="flex py-6 px-10 mb-5 w-full relative justify-center">
-        <div className="absolute left-10 text-2xl font-bold">
+        <div
+          className="absolute left-10 text-2xl font-bold cursor-pointer"
+          onClick={() => navigate("/")}
+        >
           CERTICOS BOOKS
         </div>
         <Tab
